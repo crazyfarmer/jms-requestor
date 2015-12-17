@@ -1,4 +1,4 @@
-package command;
+package messaging.command;
 
 import java.io.Serializable;
 

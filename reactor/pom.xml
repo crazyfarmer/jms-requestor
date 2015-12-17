@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>async-messaging</artifactId>
-        <groupId>purchase.demo</groupId>
+        <artifactId>root</artifactId>
+        <groupId>async-messaging</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>reactor</artifactId>
+    <artifactId>reactor-demo</artifactId>
 
     <dependencies>
         <dependency>

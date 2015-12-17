@@ -1,6 +1,8 @@
-package mq;
+package demo.mq;
 
-import command.CommandInQueueHandler;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,10 +12,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import messaging.command.CommandInQueueHandler;
+import messaging.command.CommandSender;
 
 
+/**
+ * @author lauwings
+ *
+ */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
@@ -23,7 +29,8 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private PurchaseHandler receiver;
-		CommandInQueueHandler messageInQueueHandler = new CommandInQueueHandler();
+	
+	private	CommandInQueueHandler messageInQueueHandler = new CommandInQueueHandler();
 
 	@Autowired
 	private PurchaseRequest publisher;
@@ -32,6 +39,12 @@ public class Application implements CommandLineRunner {
 	public CountDownLatch latch() {
 		return new CountDownLatch(NUMBER_OF_PURCHASE);
 	}
+	
+	@Bean
+	public CommandSender sender() {
+		return new CommandSender();
+	}
+
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -41,8 +54,8 @@ public class Application implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		ApplicationContext app = SpringApplication.run(Application.class, args);
-
+ 		ApplicationContext app = SpringApplication.run(Application.class, args);
+		
 		app.getBean(CountDownLatch.class).await(1, TimeUnit.SECONDS);
 
  	}

@@ -1,7 +1,7 @@
-package mq;
+package demo.mq;
 
-import command.Command;
 import lombok.Getter;
+import messaging.command.Command;
 
 /**
  * 设置命令
